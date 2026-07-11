@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../base/base_repository.dart';
 import 'crud_event.dart';
@@ -48,7 +49,10 @@ class CrudBloc<T> extends Bloc<CrudEvent<T>, CrudState<T>> {
       await repository.delete(event.id);
       final items = await repository.getAll();
       emit(CrudLoaded<T>(items));
-    } catch (e) {
+    } catch (e,stackTrace) {
+      debugPrint(e.toString());
+      debugPrint(stackTrace.toString());
+
       emit(CrudError<T>(e.toString()));
     }
   }

@@ -42,10 +42,8 @@ class MasterListScaffoldState extends State<MasterListScaffold> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        centerTitle: true,
         elevation: 2,
-        actions: [
-          IconButton(icon: const Icon(Icons.refresh), onPressed: widget.onRefresh),
-        ],
       ),
       body: widget.isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -71,8 +69,7 @@ class MasterListScaffoldState extends State<MasterListScaffold> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(Icons.inbox_outlined, size: 64, color: theme.colorScheme.outline),
-                                    const SizedBox(height: 16),
+                                  const SizedBox(height: 16),
                                     const Text('No records. Tap + to add.',
                                         style: TextStyle(fontSize: 16)),
                                   ],
@@ -83,7 +80,7 @@ class MasterListScaffoldState extends State<MasterListScaffold> {
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(color: theme.colorScheme.outlineVariant),
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Scrollbar(
                                   child: SingleChildScrollView(
@@ -91,11 +88,11 @@ class MasterListScaffoldState extends State<MasterListScaffold> {
                                     child: SingleChildScrollView(
                                       child: DataTable(
                                         headingRowColor: WidgetStateProperty.all(
-                                          theme.colorScheme.primaryContainer.withOpacity(0.5),
+                                          theme.colorScheme.primaryContainer.withOpacity(0.2),
                                         ),
                                         headingTextStyle: theme.textTheme.titleSmall?.copyWith(
                                           fontWeight: FontWeight.bold,
-                                          color: theme.colorScheme.onPrimaryContainer,
+                                          color: Colors.black,
                                         ),
                                         dataRowMinHeight: 48,
                                         dataRowMaxHeight: 64,

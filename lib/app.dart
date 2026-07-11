@@ -97,7 +97,7 @@ class ManufacturingMesApp extends StatelessWidget {
           floatingActionButtonTheme: FloatingActionButtonThemeData(
             backgroundColor: Colors.blueAccent,
             foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
           dataTableTheme: DataTableThemeData(
             headingTextStyle: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),

@@ -75,8 +75,13 @@ class CustomerListBodyState extends State<CustomerListBody> {
               rows: items
                   .map((c) => DataRow(cells: [
                         DataCell(Text('${c.id}')),
-                        DataCell(Text(c.name,
-                            style: const TextStyle(fontWeight: FontWeight.bold))),
+                        DataCell(SizedBox(
+                          width: 100,
+                          child: Text(c.name,
+                              style: const TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+
+                        ),
                         DataCell(Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
