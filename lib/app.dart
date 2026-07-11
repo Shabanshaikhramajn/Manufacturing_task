@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'injection.dart';
 import 'app_routes.dart';
-
 import 'core/bloc/crud_bloc.dart';
-
 import 'features/machine_manufacturer/domain/entities/machine_manufacturer.dart';
 import 'features/machine_manufacturer/domain/repositories/machine_manufacturer_repository.dart';
 import 'features/location/domain/entities/location.dart';
@@ -19,9 +16,6 @@ import 'features/component/domain/repositories/component_repository.dart';
 import 'features/component_operation/domain/entities/component_operation.dart';
 import 'features/component_operation/domain/repositories/component_operation_repository.dart';
 
-/// Every entity gets one CrudBloc<T> provided app-wide so any screen
-/// (e.g. Machine's manufacturer/location dropdowns) can read the
-/// already-loaded lookup data without re-wiring providers per route.
 class ManufacturingMesApp extends StatelessWidget {
   const ManufacturingMesApp({super.key});
 
@@ -53,10 +47,66 @@ class ManufacturingMesApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Manufacturing MES',
+        title: 'Manufacturing',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorSchemeSeed: Colors.indigo,
+          colorSchemeSeed: Colors.blueAccent,
           useMaterial3: true,
+          brightness: Brightness.light,
+          cardTheme: CardThemeData(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: const BorderSide(color: Color(0xFFE0E0E0)),
+            ),
+          ),
+          appBarTheme: const AppBarTheme(
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            elevation: 0,
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            filled: true,
+            fillColor: Colors.grey[50],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey[300]!),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey[300]!),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: Colors.blueAccent, width: 2),
+            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blueAccent,
+              foregroundColor: Colors.white,
+              minimumSize: const Size(double.infinity, 54),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 0,
+            ),
+          ),
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: Colors.blueAccent,
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          ),
+          dataTableTheme: DataTableThemeData(
+            headingTextStyle: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            headingRowColor: WidgetStateProperty.all(Colors.grey[100]),
+            dataRowColor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.hovered)) return Colors.blue[50];
+              return null;
+            }),
+          ),
         ),
         initialRoute: AppRoutes.home,
         routes: AppRoutes.routes,

@@ -7,6 +7,7 @@ import 'features/machine/presentation/pages/machine_list_page.dart';
 import 'features/customer/presentation/pages/customer_list_page.dart';
 import 'features/component/presentation/pages/component_list_page.dart';
 import 'features/component_operation/presentation/pages/component_operation_list_page.dart';
+import 'features/linked_master/presentation/pages/linked_master_view_page.dart';
 
 class AppRoutes {
   static const home = '/';
@@ -16,6 +17,7 @@ class AppRoutes {
   static const customers = '/customers';
   static const components = '/components';
   static const componentOperations = '/component-operations';
+  static const masterView = '/master-view';
 
   static Map<String, WidgetBuilder> get routes => {
         home: (_) => const HomePage(),
@@ -25,5 +27,6 @@ class AppRoutes {
         customers: (_) => const CustomerListPage(),
         components: (_) => const ComponentListPage(),
         componentOperations: (_) => const ComponentOperationListPage(),
+        masterView: (_) => const LinkedMasterViewPage(),
       };
 }
