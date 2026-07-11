@@ -1,17 +1,25 @@
-# manufacturing_setup
+# Manufacturing MES (Manufacturing Execution System)
 
-A new Flutter project.
+Designed and developed Manufacturing Management application using flutter and sqflite as local database. User clean architecture and Bloc state management for efficient performance.
+User CRUD operations using dbhelper class.
+User dependency injection for singelton instance
 
-## Getting Started
+Architecture
+Presentation <-> Domain <-> Data
+Presentation - 
+                UI/ Widget
+                State management
+Domain       - 
+                Usercases
+                Entity
+                Repository
+Data         - 
+                Model
+                implementation
+                repository
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
