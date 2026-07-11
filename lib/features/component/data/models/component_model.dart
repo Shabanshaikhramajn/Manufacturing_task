@@ -20,12 +20,12 @@ class ComponentModel extends Component {
   }
 
   factory ComponentModel.fromEntity(Component e) => ComponentModel(
-        id: e.id,
-        customerId: e.customerId,
-        componentName: e.componentName,
-        partNo: e.partNo,
-        ecn: e.ecn,
-      );
+    id: e.id,
+    customerId: e.customerId,
+    componentName: e.componentName,
+    partNo: e.partNo,
+    ecn: e.ecn,
+  );
 
   Map<String, dynamic> toMap() {
     return {

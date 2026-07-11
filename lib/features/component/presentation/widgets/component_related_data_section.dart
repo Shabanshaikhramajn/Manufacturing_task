@@ -47,7 +47,12 @@ class _ComponentRelatedDataSectionBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Linked Data', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+            Text(
+              'Linked Data',
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 4),
             Text(
               'Pick what you want to see for this component.',
@@ -81,10 +86,17 @@ class _ComponentRelatedDataSectionBody extends StatelessWidget {
             const SizedBox(height: 16),
             BlocBuilder<RelatedViewCubit, RelatedView>(
               builder: (context, view) {
-                return BlocBuilder<CrudBloc<ComponentOperation>, CrudState<ComponentOperation>>(
+                return BlocBuilder<
+                  CrudBloc<ComponentOperation>,
+                  CrudState<ComponentOperation>
+                >(
                   builder: (context, opState) {
-                    final allOps = opState is CrudLoaded<ComponentOperation> ? opState.items : <ComponentOperation>[];
-                    final ops = allOps.where((o) => o.componentId == componentId).toList();
+                    final allOps = opState is CrudLoaded<ComponentOperation>
+                        ? opState.items
+                        : <ComponentOperation>[];
+                    final ops = allOps
+                        .where((o) => o.componentId == componentId)
+                        .toList();
 
                     if (view == RelatedView.componentOperation) {
                       return _ComponentOperationTable(ops: ops);
@@ -108,12 +120,16 @@ class _ComponentOperationTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (ops.isEmpty) {
-      return const EmptyLinkedState(message: 'No operations recorded for this component yet.');
+      return const EmptyLinkedState(
+        message: 'No operations recorded for this component yet.',
+      );
     }
 
     return BlocBuilder<CrudBloc<Machine>, CrudState<Machine>>(
       builder: (context, machineState) {
-        final machines = machineState is CrudLoaded<Machine> ? machineState.items : <Machine>[];
+        final machines = machineState is CrudLoaded<Machine>
+            ? machineState.items
+            : <Machine>[];
         String machineName(int? id) {
           if (id == null) return '-';
           final match = machines.where((m) => m.id == id);
@@ -121,14 +137,21 @@ class _ComponentOperationTable extends StatelessWidget {
         }
 
         return RelatedTable(
-          columns: const ['Operation Code', 'Operation Name', 'Machine', 'Operation Type'],
+          columns: const [
+            'Operation Code',
+            'Operation Name',
+            'Machine',
+            'Operation Type',
+          ],
           rows: ops
-              .map((o) => [
-                    o.operationCode ?? '-',
-                    o.operationName,
-                    machineName(o.machineId),
-                    o.operationType.label,
-                  ])
+              .map(
+                (o) => [
+                  o.operationCode ?? '-',
+                  o.operationName,
+                  machineName(o.machineId),
+                  o.operationType.label,
+                ],
+              )
               .toList(),
         );
       },
@@ -146,19 +169,29 @@ class LinkedMachinesTable extends StatelessWidget {
 
     if (machineIds.isEmpty) {
       return const EmptyLinkedState(
-        message: 'No machine is linked yet. Add a component operation for this component first.',
+        message:
+            'No machine is linked yet. Add a component operation for this component first.',
       );
     }
 
     return BlocBuilder<CrudBloc<Machine>, CrudState<Machine>>(
       builder: (context, machineState) {
-        final machines = machineState is CrudLoaded<Machine> ? machineState.items : <Machine>[];
-        final linkedMachines = machines.where((m) => machineIds.contains(m.id)).toList();
+        final machines = machineState is CrudLoaded<Machine>
+            ? machineState.items
+            : <Machine>[];
+        final linkedMachines = machines
+            .where((m) => machineIds.contains(m.id))
+            .toList();
 
-        return BlocBuilder<CrudBloc<MachineManufacturer>, CrudState<MachineManufacturer>>(
+        return BlocBuilder<
+          CrudBloc<MachineManufacturer>,
+          CrudState<MachineManufacturer>
+        >(
           builder: (context, manufacturerState) {
             final manufacturers =
-                manufacturerState is CrudLoaded<MachineManufacturer> ? manufacturerState.items : <MachineManufacturer>[];
+                manufacturerState is CrudLoaded<MachineManufacturer>
+                ? manufacturerState.items
+                : <MachineManufacturer>[];
             String manufacturerName(int? id) {
               if (id == null) return '-';
               final match = manufacturers.where((m) => m.id == id);
@@ -167,7 +200,9 @@ class LinkedMachinesTable extends StatelessWidget {
 
             return BlocBuilder<CrudBloc<Location>, CrudState<Location>>(
               builder: (context, locationState) {
-                final locations = locationState is CrudLoaded<Location> ? locationState.items : <Location>[];
+                final locations = locationState is CrudLoaded<Location>
+                    ? locationState.items
+                    : <Location>[];
                 String locationName(int? id) {
                   if (id == null) return '-';
                   final match = locations.where((l) => l.id == id);
@@ -175,15 +210,23 @@ class LinkedMachinesTable extends StatelessWidget {
                 }
 
                 return RelatedTable(
-                  columns: const ['Machine Name', 'Serial No', 'Manufacturer', 'Type', 'Location'],
+                  columns: const [
+                    'Machine Name',
+                    'Serial No',
+                    'Manufacturer',
+                    'Type',
+                    'Location',
+                  ],
                   rows: linkedMachines
-                      .map((m) => [
-                            m.machineName,
-                            m.machineSerialNumber ?? '-',
-                            manufacturerName(m.machineManufacturerId),
-                            m.typeOfMachine.label,
-                            locationName(m.locationId),
-                          ])
+                      .map(
+                        (m) => [
+                          m.machineName,
+                          m.machineSerialNumber ?? '-',
+                          manufacturerName(m.machineManufacturerId),
+                          m.typeOfMachine.label,
+                          locationName(m.locationId),
+                        ],
+                      )
                       .toList(),
                 );
               },
@@ -217,7 +260,11 @@ class RelatedTable extends StatelessWidget {
           ),
           columns: columns.map((c) => DataColumn(label: Text(c))).toList(),
           rows: rows
-              .map((r) => DataRow(cells: r.map((cell) => DataCell(Text(cell))).toList()))
+              .map(
+                (r) => DataRow(
+                  cells: r.map((cell) => DataCell(Text(cell))).toList(),
+                ),
+              )
               .toList(),
         ),
       ),
@@ -239,7 +286,11 @@ class EmptyLinkedState extends StatelessWidget {
         children: [
           Icon(Icons.info_outline, color: Colors.grey[400], size: 32),
           const SizedBox(height: 8),
-          Text(message, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey[600])),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.grey[600]),
+          ),
         ],
       ),
     );

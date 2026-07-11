@@ -42,12 +42,12 @@ class ComponentOperation extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        componentId,
-        machineId,
-        operationCode,
-        operationName,
-        operationDescription,
-        operationType,
-      ];
+    id,
+    componentId,
+    machineId,
+    operationCode,
+    operationName,
+    operationDescription,
+    operationType,
+  ];
 }

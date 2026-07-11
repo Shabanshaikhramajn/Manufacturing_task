@@ -78,9 +78,12 @@ class ComponentListBodyState extends State<ComponentListBody> {
             return MasterListScaffold(
               title: 'Components',
               isLoading: state is CrudLoading<Component>,
-              errorMessage: state is CrudError<Component> ? state.message : null,
+              errorMessage: state is CrudError<Component>
+                  ? state.message
+                  : null,
               onAdd: () => openDetail(context),
-              onRefresh: () => context.read<CrudBloc<Component>>().add(const LoadAll()),
+              onRefresh: () =>
+                  context.read<CrudBloc<Component>>().add(const LoadAll()),
               columns: const [
                 DataColumn(label: Text('Id')),
                 DataColumn(label: Text('Customer')),
@@ -90,27 +93,45 @@ class ComponentListBodyState extends State<ComponentListBody> {
                 DataColumn(label: Text('Actions')),
               ],
               rows: items
-                  .map((c) => DataRow(cells: [
+                  .map(
+                    (c) => DataRow(
+                      cells: [
                         DataCell(Text('${c.id}')),
                         DataCell(Text(customerName(context, c.customerId))),
-                        DataCell(Text(c.componentName, style: const TextStyle(fontWeight: FontWeight.bold))),
+                        DataCell(
+                          Text(
+                            c.componentName,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
                         DataCell(Text(c.partNo ?? '-')),
                         DataCell(Text(c.ecn ?? '-')),
-                        DataCell(Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.edit, color: Colors.blue),
-                              onPressed: () => openDetail(context, item: c),
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.delete, color: Colors.grey),
-                              onPressed: () =>
-                                  context.read<CrudBloc<Component>>().add(DeleteItem(c.id!)),
-                            ),
-                          ],
-                        )),
-                      ]))
+                        DataCell(
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.edit,
+                                  color: Colors.blue,
+                                ),
+                                onPressed: () => openDetail(context, item: c),
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () => context
+                                    .read<CrudBloc<Component>>()
+                                    .add(DeleteItem(c.id!)),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                   .toList(),
             );
           },

@@ -1,4 +1,3 @@
-
 enum OperationType {
   turning(1, 'Turning'),
   milling(2, 'Milling'),

@@ -81,11 +81,9 @@ class ComponentDetailBodyState extends State<ComponentDetailBody> {
     final isEdit = widget.existing != null;
     final theme = Theme.of(context);
     final cubit = context.read<ComponentFormCubit>();
-    
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(isEdit ? 'Edit Component' : 'Add Component'),
-      ),
+      appBar: AppBar(title: Text(isEdit ? 'Edit Component' : 'Add Component')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Form(
@@ -93,9 +91,17 @@ class ComponentDetailBodyState extends State<ComponentDetailBody> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Component Details', style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+              Text(
+                'Component Details',
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               const SizedBox(height: 8),
-              Text('Enter the information for the manufacturing component.', style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey)),
+              Text(
+                'Enter the information for the manufacturing component.',
+                style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey),
+              ),
               const SizedBox(height: 24),
               Card(
                 elevation: 0,
@@ -109,9 +115,15 @@ class ComponentDetailBodyState extends State<ComponentDetailBody> {
                     children: [
                       BlocBuilder<CrudBloc<Customer>, CrudState<Customer>>(
                         builder: (context, state) {
-                          final options = state is CrudLoaded<Customer> ? state.items : <Customer>[];
-                          return BlocBuilder<ComponentFormCubit, ComponentFormState>(
-                            buildWhen: (previous, current) => previous.customerId != current.customerId,
+                          final options = state is CrudLoaded<Customer>
+                              ? state.items
+                              : <Customer>[];
+                          return BlocBuilder<
+                            ComponentFormCubit,
+                            ComponentFormState
+                          >(
+                            buildWhen: (previous, current) =>
+                                previous.customerId != current.customerId,
                             builder: (context, formState) {
                               return DropdownButtonFormField<int>(
                                 value: formState.customerId,
@@ -119,10 +131,17 @@ class ComponentDetailBodyState extends State<ComponentDetailBody> {
                                   labelText: 'Customer',
                                 ),
                                 items: options
-                                    .map((c) => DropdownMenuItem(value: c.id, child: Text(c.name)))
+                                    .map(
+                                      (c) => DropdownMenuItem(
+                                        value: c.id,
+                                        child: Text(c.name),
+                                      ),
+                                    )
                                     .toList(),
                                 onChanged: cubit.updateCustomerId,
-                                validator: (v) => v == null ? 'Please select a customer' : null,
+                                validator: (v) => v == null
+                                    ? 'Please select a customer'
+                                    : null,
                               );
                             },
                           );
@@ -134,23 +153,27 @@ class ComponentDetailBodyState extends State<ComponentDetailBody> {
                         decoration: const InputDecoration(
                           labelText: 'Component Name',
                         ),
-                        validator: (v) => (v == null || v.trim().isEmpty) ? 'Component name required' : null,
+                        validator: (v) => (v == null || v.trim().isEmpty)
+                            ? 'Component name required'
+                            : null,
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
                         controller: partNoController,
                         decoration: const InputDecoration(
                           labelText: 'Part Number',
-                          ),
-                        validator: (v) => (v == null || v.trim().isEmpty) ? 'Part number required' : null,
+                        ),
+                        validator: (v) => (v == null || v.trim().isEmpty)
+                            ? 'Part number required'
+                            : null,
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
                         controller: ecnController,
-                        decoration: const InputDecoration(
-                          labelText: 'ECN',
-                        ),
-                        validator: (v) => (v == null || v.trim().isEmpty) ? 'ECN required' : null,
+                        decoration: const InputDecoration(labelText: 'ECN'),
+                        validator: (v) => (v == null || v.trim().isEmpty)
+                            ? 'ECN required'
+                            : null,
                       ),
                     ],
                   ),

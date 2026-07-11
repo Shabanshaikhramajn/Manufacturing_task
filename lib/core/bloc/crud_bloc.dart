@@ -14,7 +14,10 @@ class CrudBloc<T> extends Bloc<CrudEvent<T>, CrudState<T>> {
     on<DeleteItem<T>>(onDeleteItem);
   }
 
-  Future<void> onLoadAllItems(LoadAll<T> event, Emitter<CrudState<T>> emit) async {
+  Future<void> onLoadAllItems(
+    LoadAll<T> event,
+    Emitter<CrudState<T>> emit,
+  ) async {
     emit(CrudLoading<T>());
     try {
       final items = await repository.getAll();
@@ -34,7 +37,10 @@ class CrudBloc<T> extends Bloc<CrudEvent<T>, CrudState<T>> {
     }
   }
 
-  Future<void> onUpdateItem(UpdateItem<T> event, Emitter<CrudState<T>> emit) async {
+  Future<void> onUpdateItem(
+    UpdateItem<T> event,
+    Emitter<CrudState<T>> emit,
+  ) async {
     try {
       await repository.update(event.item);
       final items = await repository.getAll();
@@ -44,12 +50,15 @@ class CrudBloc<T> extends Bloc<CrudEvent<T>, CrudState<T>> {
     }
   }
 
-  Future<void> onDeleteItem(DeleteItem<T> event, Emitter<CrudState<T>> emit) async {
+  Future<void> onDeleteItem(
+    DeleteItem<T> event,
+    Emitter<CrudState<T>> emit,
+  ) async {
     try {
       await repository.delete(event.id);
       final items = await repository.getAll();
       emit(CrudLoaded<T>(items));
-    } catch (e,stackTrace) {
+    } catch (e, stackTrace) {
       debugPrint(e.toString());
       debugPrint(stackTrace.toString());
 

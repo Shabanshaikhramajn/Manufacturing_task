@@ -1,4 +1,3 @@
-
 enum MachineType {
   cncTurningCenter(1, 'CNC Turning Center'),
   vmc(2, 'VMC'),

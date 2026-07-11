@@ -1,7 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import '../database/database_helper.dart';
 
-
 class GenericLocalDataSource<T> {
   final String tableName;
   final Map<String, dynamic> Function(T item) toMap;
@@ -17,16 +16,16 @@ class GenericLocalDataSource<T> {
     this.idColumn = 'id',
   });
 
-  Future<Database> get _db async => DatabaseHelper.instance.database;
+  Future<Database> get database async => DatabaseHelper.instance.database;
 
   Future<List<T>> getAll() async {
-    final db = await _db;
+    final db = await database;
     final rows = await db.query(tableName);
     return rows.map(fromMap).toList();
   }
 
   Future<T?> getById(int id) async {
-    final db = await _db;
+    final db = await database;
     final rows = await db.query(
       tableName,
       where: '$idColumn = ?',
@@ -38,14 +37,14 @@ class GenericLocalDataSource<T> {
   }
 
   Future<int> insert(T item) async {
-    final db = await _db;
+    final db = await database;
     final map = Map<String, dynamic>.from(toMap(item));
     map.remove(idColumn);
     return db.insert(tableName, map);
   }
 
   Future<int> update(T item) async {
-    final db = await _db;
+    final db = await database;
     final map = Map<String, dynamic>.from(toMap(item));
     map.remove(idColumn);
     return db.update(
@@ -57,7 +56,7 @@ class GenericLocalDataSource<T> {
   }
 
   Future<int> delete(int id) async {
-    final db = await _db;
+    final db = await database;
     return db.delete(tableName, where: '$idColumn = ?', whereArgs: [id]);
   }
 }

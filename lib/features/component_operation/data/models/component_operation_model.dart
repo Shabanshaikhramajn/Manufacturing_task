@@ -24,7 +24,8 @@ class ComponentOperationModel extends ComponentOperation {
     );
   }
 
-  factory ComponentOperationModel.fromEntity(ComponentOperation e) => ComponentOperationModel(
+  factory ComponentOperationModel.fromEntity(ComponentOperation e) =>
+      ComponentOperationModel(
         id: e.id,
         componentId: e.componentId,
         machineId: e.machineId,

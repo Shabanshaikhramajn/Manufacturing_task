@@ -31,7 +31,7 @@ class DatabaseHelper {
           await db.execute('DROP TABLE IF EXISTS customers');
           await db.execute('DROP TABLE IF EXISTS locations');
           await db.execute('DROP TABLE IF EXISTS machine_manufacturers');
-          
+
           await createTables(db);
         }
       },

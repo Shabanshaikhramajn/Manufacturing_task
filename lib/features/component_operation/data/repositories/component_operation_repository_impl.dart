@@ -7,12 +7,12 @@ class ComponentOperationRepositoryImpl extends ComponentOperationRepository {
   final GenericLocalDataSource<ComponentOperation> dataSource;
 
   ComponentOperationRepositoryImpl()
-      : dataSource = GenericLocalDataSource<ComponentOperation>(
-          tableName: 'component_operations',
-          toMap: (e) => ComponentOperationModel.fromEntity(e).toMap(),
-          fromMap: (m) => ComponentOperationModel.fromMap(m),
-          getId: (e) => e.id ?? 0,
-        );
+    : dataSource = GenericLocalDataSource<ComponentOperation>(
+        tableName: 'component_operations',
+        toMap: (e) => ComponentOperationModel.fromEntity(e).toMap(),
+        fromMap: (m) => ComponentOperationModel.fromMap(m),
+        getId: (e) => e.id ?? 0,
+      );
 
   @override
   Future<int> add(ComponentOperation item) => dataSource.insert(item);

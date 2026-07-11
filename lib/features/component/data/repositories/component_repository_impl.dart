@@ -7,12 +7,12 @@ class ComponentRepositoryImpl extends ComponentRepository {
   final GenericLocalDataSource<Component> dataSource;
 
   ComponentRepositoryImpl()
-      : dataSource = GenericLocalDataSource<Component>(
-          tableName: 'components',
-          toMap: (e) => ComponentModel.fromEntity(e).toMap(),
-          fromMap: (m) => ComponentModel.fromMap(m),
-          getId: (e) => e.id ?? 0,
-        );
+    : dataSource = GenericLocalDataSource<Component>(
+        tableName: 'components',
+        toMap: (e) => ComponentModel.fromEntity(e).toMap(),
+        fromMap: (m) => ComponentModel.fromMap(m),
+        getId: (e) => e.id ?? 0,
+      );
 
   @override
   Future<int> add(Component item) => dataSource.insert(item);

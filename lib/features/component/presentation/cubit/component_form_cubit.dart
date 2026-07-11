@@ -33,13 +33,19 @@ class ComponentFormState extends Equatable {
 }
 
 class ComponentFormCubit extends Cubit<ComponentFormState> {
-  ComponentFormCubit({int? initialCustomerId, String? initialName, String? initialPartNo, String? initialEcn})
-      : super(ComponentFormState(
-          customerId: initialCustomerId,
-          name: initialName ?? '',
-          partNo: initialPartNo ?? '',
-          ecn: initialEcn ?? '',
-        ));
+  ComponentFormCubit({
+    int? initialCustomerId,
+    String? initialName,
+    String? initialPartNo,
+    String? initialEcn,
+  }) : super(
+         ComponentFormState(
+           customerId: initialCustomerId,
+           name: initialName ?? '',
+           partNo: initialPartNo ?? '',
+           ecn: initialEcn ?? '',
+         ),
+       );
 
   void updateCustomerId(int? id) => emit(state.copyWith(customerId: id));
   void updateName(String name) => emit(state.copyWith(name: name));

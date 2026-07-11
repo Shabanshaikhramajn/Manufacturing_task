@@ -30,12 +30,17 @@ class ComponentOperationFormState extends Equatable {
 }
 
 class ComponentOperationFormCubit extends Cubit<ComponentOperationFormState> {
-  ComponentOperationFormCubit({int? initialComponentId, int? initialMachineId, OperationType? initialType})
-      : super(ComponentOperationFormState(
-          componentId: initialComponentId,
-          machineId: initialMachineId,
-          type: initialType ?? OperationType.turning,
-        ));
+  ComponentOperationFormCubit({
+    int? initialComponentId,
+    int? initialMachineId,
+    OperationType? initialType,
+  }) : super(
+         ComponentOperationFormState(
+           componentId: initialComponentId,
+           machineId: initialMachineId,
+           type: initialType ?? OperationType.turning,
+         ),
+       );
 
   void updateComponentId(int? id) => emit(state.copyWith(componentId: id));
   void updateMachineId(int? id) => emit(state.copyWith(machineId: id));
